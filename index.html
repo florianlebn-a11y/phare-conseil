@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Phare | Conseil & Opérations</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -32,6 +32,7 @@
         .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -6px; left: 0; background-color: #C5A065; transition: width 0.3s; }
         .nav-link:hover::after { width: 100%; }
 
+        /* Animation des CTA */
         .cta-button { position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .cta-button::after { 
             content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%; 
@@ -40,6 +41,17 @@
         }
         @keyframes shine { 0% { left: -150%; } 15% { left: 150%; } 100% { left: 150%; } }
         .cta-button:hover { transform: translateY(-4px) scale(1.02); }
+
+        /* Correction pour le bouton flottant sur mobile */
+        #floating-cta {
+            /* On utilise env(safe-area-inset-bottom) pour iOS et on remonte la base à 2rem (32px) au lieu de 1.5rem */
+            bottom: calc(2rem + env(safe-area-inset-bottom));
+        }
+        @media (max-width: 640px) {
+            #floating-cta {
+                bottom: calc(5rem + env(safe-area-inset-bottom)); /* Remonté encore plus haut sur petit mobile */
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -149,7 +161,6 @@
                     <div class="absolute -top-5 -right-3 bg-phare-gold text-phare-dark px-6 py-2 rounded-lg font-extrabold text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_20px_rgba(197,160,101,0.5)] z-10 border border-white/30 transform rotate-2">
                         Le plus choisi
                     </div>
-                    
                     <div class="text-phare-gold text-4xl mb-6">🧭</div>
                     <h4 class="text-xl font-bold uppercase mb-4">Conseil & Opérations</h4>
                     <p class="text-slate-300 font-light leading-relaxed">Audit de vos process et implémentation terrain pour sécuriser votre croissance.</p>
@@ -183,7 +194,7 @@
         </div>
     </footer>
 
-    <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="floating-cta" class="cta-button fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 bg-phare-gold text-phare-dark px-6 py-4 rounded-full font-bold text-sm md:text-base shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 hover:bg-yellow-600">
+    <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="floating-cta" class="cta-button fixed right-6 md:right-8 z-50 bg-phare-gold text-phare-dark px-6 py-4 rounded-full font-bold text-sm md:text-base shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 hover:bg-yellow-600">
         Planifier un appel expert
     </a>
 
