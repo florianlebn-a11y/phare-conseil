@@ -23,7 +23,6 @@
         html { scroll-behavior: smooth; }
         body { color: #2D3748; background-color: #ffffff; overflow-x: hidden; }
 
-        /* ── Reveal animations ── */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -31,14 +30,12 @@
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Stagger delays for card grids */
         .reveal-stagger:nth-child(1) { transition-delay: 0s; }
         .reveal-stagger:nth-child(2) { transition-delay: 0.12s; }
         .reveal-stagger:nth-child(3) { transition-delay: 0.24s; }
         .reveal-stagger:nth-child(4) { transition-delay: 0.36s; }
         .reveal-stagger:nth-child(5) { transition-delay: 0.48s; }
 
-        /* Reveal from left */
         .reveal-left {
             opacity: 0;
             transform: translateX(-40px);
@@ -46,7 +43,6 @@
         }
         .reveal-left.active { opacity: 1; transform: translateX(0); }
 
-        /* Reveal from right */
         .reveal-right {
             opacity: 0;
             transform: translateX(40px);
@@ -69,7 +65,6 @@
         @keyframes shine { 0% { left: -150%; } 15% { left: 150%; } 100% { left: 150%; } }
         .cta-button:hover { transform: translateY(-4px) scale(1.02); }
 
-        /* ── Processus timeline ── */
         .step-number {
             width: 56px; height: 56px;
             border: 2px solid #C5A065;
@@ -87,16 +82,7 @@
             background: #C5A065;
             color: #1A2332;
         }
-        .step-connector {
-            position: absolute;
-            top: 28px;
-            left: calc(50% + 28px);
-            width: calc(100% - 56px);
-            height: 2px;
-            background: linear-gradient(to right, #C5A065, rgba(197,160,101,0.2));
-        }
 
-        /* ── Service card hover ── */
         .service-card {
             transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
@@ -111,13 +97,17 @@
             transform: translateY(-6px);
             box-shadow: 0 20px 40px rgba(197,160,101,0.25);
         }
+
+        .hero-divider {
+            width: 60px;
+            height: 1px;
+            background: rgba(197,160,101,0.35);
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- ══════════════════════════════════════
-         NAV
-    ══════════════════════════════════════ -->
+    <!-- NAV -->
     <nav class="fixed w-full z-50 bg-phare-dark/95 backdrop-blur-md shadow-lg">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 flex justify-between items-stretch h-16 sm:h-20 md:h-24 relative">
 
@@ -162,12 +152,30 @@
         </div>
     </nav>
 
-    <!-- ══════════════════════════════════════
-         HERO
-    ══════════════════════════════════════ -->
+    <!-- HERO -->
     <section class="min-h-screen bg-white flex items-center pt-32 pb-16 md:pt-40 md:pb-24">
-        <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-12 md:gap-20 items-center justify-center">
+        <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-16 md:gap-20 items-center justify-center">
 
+            <!-- 1. Titre + CTA -->
+            <div class="space-y-8 w-full max-w-4xl text-center">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-phare-dark leading-tight tracking-tight">
+                    Ne naviguez plus à vue.<br>
+                    <span class="text-phare-gold italic font-bold">Guidez votre croissance.</span>
+                </h1>
+                <p class="text-slate-500 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+                    Vous avez l'ambition. Nous avons la méthode. Nous transformons votre potentiel en performance réelle.
+                </p>
+                <div class="pt-4">
+                    <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="hero-cta" class="cta-button bg-phare-gold text-phare-dark px-10 py-5 rounded-full font-bold text-base md:text-lg shadow-xl inline-flex items-center justify-center text-center hover:bg-yellow-600">
+                        Planifier un appel avec un expert
+                    </a>
+                </div>
+            </div>
+
+            <!-- Séparateur -->
+            <div class="hero-divider"></div>
+
+            <!-- 2. Compteur -->
             <div class="w-full flex flex-col items-center">
                 <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-6 text-center">
                     Chiffre d'affaires généré
@@ -184,26 +192,10 @@
                 </p>
             </div>
 
-            <div class="space-y-8 w-full max-w-4xl text-center">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-phare-dark leading-tight tracking-tight">
-                    Ne naviguez plus à vue.<br>
-                    <span class="text-phare-gold italic font-bold">Guidez votre croissance.</span>
-                </h1>
-                <p class="text-slate-500 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
-                    Phare est le repère stratégique des entreprises ambitieuses. Nous transformons votre potentiel en performance mesurable.
-                </p>
-                <div class="pt-4">
-                    <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="hero-cta" class="cta-button bg-phare-gold text-phare-dark px-10 py-5 rounded-full font-bold text-base md:text-lg shadow-xl inline-flex items-center justify-center text-center hover:bg-yellow-600">
-                        Planifier un appel avec un expert
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         MISSION
-    ══════════════════════════════════════ -->
+    <!-- MISSION -->
     <section class="section-spacing bg-phare-dark relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 text-center reveal">
             <h2 class="text-phare-gold text-sm md:text-lg font-medium tracking-[0.3em] uppercase mb-8">Notre Mission</h2>
@@ -214,9 +206,7 @@
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         PROCESSUS — NOUVELLE SECTION
-    ══════════════════════════════════════ -->
+    <!-- PROCESSUS -->
     <section class="section-spacing bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-20 reveal">
@@ -224,13 +214,10 @@
                 <h2 class="text-3xl md:text-5xl font-bold text-phare-dark">Notre méthode en 3 étapes.</h2>
             </div>
 
-            <!-- Desktop : ligne de connexion + étapes -->
+            <!-- Desktop -->
             <div class="hidden md:grid md:grid-cols-3 gap-0 relative">
-
-                <!-- Ligne de connexion -->
                 <div class="absolute top-7 left-[calc(16.66%+28px)] right-[calc(16.66%+28px)] h-0.5 bg-gradient-to-r from-phare-gold via-phare-gold/40 to-phare-gold/10 z-0"></div>
 
-                <!-- Étape 1 -->
                 <div class="step-card reveal-left flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
                     <div class="step-number mb-8">1</div>
                     <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
@@ -240,7 +227,6 @@
                     </p>
                 </div>
 
-                <!-- Étape 2 -->
                 <div class="step-card reveal flex flex-col items-center text-center px-8 pt-0 pb-10 relative" style="transition-delay:0.15s">
                     <div class="step-number mb-8">2</div>
                     <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
@@ -250,7 +236,6 @@
                     </p>
                 </div>
 
-                <!-- Étape 3 -->
                 <div class="step-card reveal-right flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
                     <div class="step-number mb-8">3</div>
                     <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
@@ -261,7 +246,7 @@
                 </div>
             </div>
 
-            <!-- Mobile : vertical -->
+            <!-- Mobile -->
             <div class="flex flex-col gap-0 md:hidden">
                 <div class="flex gap-6 items-start pb-10 relative">
                     <div class="flex flex-col items-center flex-shrink-0">
@@ -294,7 +279,6 @@
                 </div>
             </div>
 
-            <!-- CTA centré -->
             <div class="flex justify-center mt-16 reveal">
                 <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="cta-button border-2 border-phare-gold text-phare-dark px-10 py-4 rounded-full font-bold text-sm md:text-base hover:bg-phare-gold transition-colors duration-300 inline-flex items-center gap-2">
                     Démarrer mon diagnostic
@@ -303,9 +287,7 @@
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         SERVICES
-    ══════════════════════════════════════ -->
+    <!-- SERVICES -->
     <section class="section-spacing bg-slate-50">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl md:text-5xl font-bold text-center mb-24 reveal text-phare-dark">Des solutions pour chaque étape.</h2>
@@ -339,7 +321,6 @@
                     <p class="text-slate-600 font-light leading-relaxed">Transformation de vos équipes en machines de vente grâce à un accompagnement terrain.</p>
                 </div>
 
-                <!-- NOUVELLE CARTE MARKETING — pleine largeur -->
                 <div id="marketing" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100 lg:col-span-2">
                     <div class="flex flex-col md:flex-row md:items-center gap-6">
                         <div class="text-phare-gold text-4xl flex-shrink-0">📣</div>
@@ -356,9 +337,7 @@
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         FOOTER
-    ══════════════════════════════════════ -->
+    <!-- FOOTER -->
     <footer class="py-16 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
             <div class="space-y-4">
@@ -372,15 +351,13 @@
         </div>
     </footer>
 
-    <!-- ══════════════════════════════════════
-         FLOATING CTA
-    ══════════════════════════════════════ -->
+    <!-- FLOATING CTA -->
     <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="floating-cta" class="cta-button fixed bottom-8 left-1/2 -translate-x-1/2 md:bottom-10 md:left-auto md:right-10 md:translate-x-0 z-50 w-[90%] max-w-[350px] md:w-auto bg-phare-gold hover:bg-yellow-600 text-phare-dark px-6 py-4 rounded-full font-bold text-sm md:text-base text-center shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 flex items-center justify-center">
         Planifier un appel expert
     </a>
 
     <script>
-        /* ── Mobile menu ── */
+        /* Mobile menu */
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const chevron = document.getElementById('menu-chevron');
@@ -390,7 +367,6 @@
             chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
         });
 
-        /* FIX : fermeture du menu mobile au clic sur un lien */
         document.querySelectorAll('.mobile-link').forEach(link => {
             link.addEventListener('click', () => {
                 menu.classList.add('hidden');
@@ -398,7 +374,7 @@
             });
         });
 
-        /* ── Compteur animé ── */
+        /* Compteur animé */
         function animateCounter() {
             const counter = document.getElementById('counter');
             const target = +counter.getAttribute('data-target');
@@ -417,7 +393,7 @@
             requestAnimationFrame(update);
         }
 
-        /* ── Intersection Observer (reveal + stagger) ── */
+        /* Intersection Observer */
         const observerOptions = { threshold: 0.1 };
 
         const revealObserver = new IntersectionObserver((entries) => {
@@ -433,7 +409,7 @@
             revealObserver.observe(el);
         });
 
-        /* ── Floating CTA ── */
+        /* Floating CTA */
         const floatingCta = document.getElementById('floating-cta');
         const heroCta = document.getElementById('hero-cta');
 
