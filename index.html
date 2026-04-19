@@ -23,21 +23,6 @@
         html { scroll-behavior: smooth; }
         body { color: #2D3748; background-color: #ffffff; overflow-x: hidden; }
 
-        /* ── Scroll offset pour nav fixe ── */
-        #ventes, #conseil, #branche, #coaching, #marketing {
-            scroll-margin-top: 72px;
-        }
-        @media (min-width: 640px) {
-            #ventes, #conseil, #branche, #coaching, #marketing {
-                scroll-margin-top: 88px;
-            }
-        }
-        @media (min-width: 768px) {
-            #ventes, #conseil, #branche, #coaching, #marketing {
-                scroll-margin-top: 104px;
-            }
-        }
-
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -93,31 +78,12 @@
             z-index: 2;
             transition: background 0.4s, color 0.4s;
         }
-        .step-card:hover .step-number {
-            background: #C5A065;
-            color: #1A2332;
-        }
+        .step-card:hover .step-number { background: #C5A065; color: #1A2332; }
 
-        .service-card {
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-        .service-card-featured {
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-        .service-card-featured:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(197,160,101,0.25);
-        }
-
-        .hero-divider {
-            width: 60px;
-            height: 1px;
-            background: rgba(197,160,101,0.35);
-        }
+        .service-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+        .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .service-card-featured { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+        .service-card-featured:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(197,160,101,0.25); }
 
         .hero-section {
             min-height: 100svh;
@@ -125,339 +91,306 @@
             padding-bottom: 1.5rem;
         }
         @media (min-width: 640px) {
-            .hero-section {
-                padding-top: calc(80px + 1.5rem);
-                padding-bottom: 2rem;
-            }
+            .hero-section { padding-top: calc(80px + 1.5rem); padding-bottom: 2rem; }
         }
         @media (min-width: 768px) {
-            .hero-section {
-                padding-top: calc(96px + 2rem);
-                padding-bottom: 4rem;
-            }
+            .hero-section { padding-top: calc(96px + 2rem); padding-bottom: 4rem; }
         }
+
+        #ventes, #conseil, #branche, #coaching, #marketing { scroll-margin-top: 72px; }
+        @media (min-width: 640px) { #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 88px; } }
+        @media (min-width: 768px) { #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 104px; } }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- NAV -->
-    <nav class="fixed w-full z-50 bg-phare-dark/95 backdrop-blur-md shadow-lg">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 flex justify-between items-stretch h-16 sm:h-20 md:h-24 relative">
+<!-- NAV -->
+<nav class="fixed w-full z-50 bg-phare-dark/95 backdrop-blur-md shadow-lg">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 flex justify-between items-stretch h-16 sm:h-20 md:h-24 relative">
 
-            <a href="#" class="relative flex items-center pr-14 sm:pr-8 md:pr-16 pl-4 sm:pl-6 -ml-2 sm:-ml-6 flex-shrink-0 group">
-                <div class="absolute inset-y-0 right-0 w-[100vw] bg-white z-0" style="clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%);"></div>
-                <img src="logo.png" alt="Phare" class="h-14 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[150px] sm:max-w-none object-contain relative z-10 transform scale-110 sm:scale-100 origin-left group-hover:scale-105 transition-transform">
+        <a href="#" class="relative flex items-center pr-14 sm:pr-8 md:pr-16 pl-4 sm:pl-6 -ml-2 sm:-ml-6 flex-shrink-0 group">
+            <div class="absolute inset-y-0 right-0 w-[100vw] bg-white z-0" style="clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%);"></div>
+            <img src="logo.png" alt="Phare" class="h-14 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[150px] sm:max-w-none object-contain relative z-10 transform scale-110 sm:scale-100 origin-left group-hover:scale-105 transition-transform">
+        </a>
+
+        <div class="flex-1 flex justify-center items-center lg:hidden z-20">
+            <button id="mobile-menu-btn" class="text-white px-1 focus:outline-none hover:text-phare-gold font-bold uppercase tracking-widest text-[9px] sm:text-[10px] flex items-center gap-1 whitespace-nowrap">
+                Nos services
+                <svg class="w-2.5 h-2.5 transition-transform duration-300 flex-shrink-0" id="menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8 px-6 xl:px-12 text-[10px] xl:text-xs font-bold uppercase tracking-widest text-white relative z-10">
+            <a href="#ventes" class="nav-link hover:text-phare-gold whitespace-nowrap">Force de vente sup.</a>
+            <a href="#conseil" class="nav-link hover:text-phare-gold whitespace-nowrap">Conseil</a>
+            <a href="#branche" class="nav-link hover:text-phare-gold whitespace-nowrap">Création de branche</a>
+            <a href="#coaching" class="nav-link hover:text-phare-gold whitespace-nowrap">Coaching</a>
+            <a href="#marketing" class="nav-link hover:text-phare-gold whitespace-nowrap">Force marketing sup.</a>
+        </div>
+
+        <div class="flex items-center relative z-10 pl-1 flex-shrink-0">
+            <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="cta-button bg-phare-gold text-phare-dark px-3 py-1.5 sm:px-4 sm:py-2 md:px-8 md:py-3 rounded-full font-semibold text-[10px] sm:text-xs md:text-sm hover:bg-yellow-600 shadow-lg whitespace-nowrap flex items-center justify-center text-center">
+                Prendre RDV
             </a>
-
-            <div class="flex-1 flex justify-center items-center lg:hidden z-20">
-                <button id="mobile-menu-btn" class="text-white px-1 focus:outline-none hover:text-phare-gold font-bold uppercase tracking-widest text-[9px] sm:text-[10px] flex items-center gap-1 whitespace-nowrap">
-                    Nos services
-                    <svg class="w-2.5 h-2.5 transition-transform duration-300 flex-shrink-0" id="menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8 px-6 xl:px-12 text-[10px] xl:text-xs font-bold uppercase tracking-widest text-white relative z-10">
-                <a href="#ventes" class="nav-link hover:text-phare-gold whitespace-nowrap">Force de vente sup.</a>
-                <a href="#conseil" class="nav-link hover:text-phare-gold whitespace-nowrap">Conseil</a>
-                <a href="#branche" class="nav-link hover:text-phare-gold whitespace-nowrap">Création de branche</a>
-                <a href="#coaching" class="nav-link hover:text-phare-gold whitespace-nowrap">Coaching</a>
-                <a href="#marketing" class="nav-link hover:text-phare-gold whitespace-nowrap">Force marketing sup.</a>
-            </div>
-
-            <div class="flex items-center relative z-10 pl-1 flex-shrink-0">
-                <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="cta-button bg-phare-gold text-phare-dark px-3 py-1.5 sm:px-4 sm:py-2 md:px-8 md:py-3 rounded-full font-semibold text-[10px] sm:text-xs md:text-sm hover:bg-yellow-600 shadow-lg whitespace-nowrap flex items-center justify-center text-center">
-                    Prendre RDV
-                </a>
-            </div>
         </div>
+    </div>
 
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-phare-dark border-t border-white/10 shadow-2xl">
-            <div class="flex flex-col px-6 py-4 space-y-5 text-xs font-bold uppercase tracking-widest text-white">
-                <a href="#ventes" class="mobile-link hover:text-phare-gold">Force de vente sup.</a>
-                <a href="#conseil" class="mobile-link hover:text-phare-gold">Conseil</a>
-                <a href="#branche" class="mobile-link hover:text-phare-gold">Création de branche</a>
-                <a href="#coaching" class="mobile-link hover:text-phare-gold">Coaching</a>
-                <a href="#marketing" class="mobile-link hover:text-phare-gold">Force marketing sup.</a>
-            </div>
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-phare-dark border-t border-white/10 shadow-2xl">
+        <div class="flex flex-col px-6 py-4 space-y-5 text-xs font-bold uppercase tracking-widest text-white">
+            <a href="#ventes" class="mobile-link hover:text-phare-gold">Force de vente sup.</a>
+            <a href="#conseil" class="mobile-link hover:text-phare-gold">Conseil</a>
+            <a href="#branche" class="mobile-link hover:text-phare-gold">Création de branche</a>
+            <a href="#coaching" class="mobile-link hover:text-phare-gold">Coaching</a>
+            <a href="#marketing" class="mobile-link hover:text-phare-gold">Force marketing sup.</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- HERO -->
-    <section class="hero-section bg-white flex items-center">
-        <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-6 md:gap-10 items-center justify-center">
+<!-- HERO -->
+<section class="hero-section bg-white flex items-center">
+    <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-6 md:gap-8 items-center justify-center text-center">
 
-            <!-- 1. Compteur -->
-            <div class="w-full flex flex-col items-center">
-                <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-3 md:mb-4 text-center">
-                    Chiffre d'affaires généré
-                </p>
-                <div class="flex items-baseline font-bold tabular-nums whitespace-nowrap text-phare-dark">
-                    <span class="text-4xl md:text-6xl lg:text-7xl mr-2">+</span>
-                    <span class="text-[3.5rem] sm:text-7xl md:text-[7rem] lg:text-[8.5rem] xl:text-[10rem] leading-none text-phare-gold" id="counter" data-target="3000000">
-                        0 000 000
-                    </span>
-                    <span class="text-4xl md:text-6xl lg:text-7xl ml-3">€</span>
-                </div>
-                <p class="text-slate-500 text-sm md:text-lg mt-3 md:mt-4 italic text-center">
-                    pour nos clients <span class="text-phare-dark font-bold">en seulement 2 ans</span>
-                </p>
-            </div>
-
-            <!-- Séparateur -->
-            <div class="hero-divider"></div>
-
-            <!-- 2. Titre + CTA -->
-            <div class="space-y-4 md:space-y-6 w-full max-w-4xl text-center">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-phare-dark leading-tight tracking-tight">
-                    Ne naviguez plus à vue.<br>
-                    <span class="text-phare-gold italic font-bold">Guidez votre croissance.</span>
-                </h1>
-                <p class="text-slate-500 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
-                    Vous avez l'ambition. Nous avons la méthode. Nous transformons votre potentiel en performance réelle.
-                </p>
-                <div class="pt-1 md:pt-2">
-                    <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="hero-cta" class="cta-button bg-phare-gold text-phare-dark px-10 py-5 rounded-full font-bold text-base md:text-lg shadow-xl inline-flex items-center justify-center text-center hover:bg-yellow-600">
-                        Planifier un appel avec un expert
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- MISSION -->
-    <section class="section-spacing bg-phare-dark relative overflow-hidden">
-        <div class="max-w-4xl mx-auto px-6 text-center reveal">
-            <h2 class="text-phare-gold text-sm md:text-lg font-medium tracking-[0.3em] uppercase mb-8">Notre Mission</h2>
-            <h3 class="text-3xl md:text-5xl font-bold leading-tight mb-10 text-white">Votre repère dans la tempête.</h3>
-            <p class="text-slate-300 text-lg md:text-xl font-light leading-relaxed">
-                Le marché est en perpétuel mouvement. Dans cette complexité, vous avez besoin d'une vision claire. Nous avons choisi le nom <strong>Phare</strong> car nous sommes votre guide : nous apportons un cap et une arrivée à bon port.
+        <div class="space-y-5 md:space-y-7 w-full max-w-4xl">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-phare-dark leading-tight tracking-tight reveal">
+                Ne naviguez plus à vue.<br>
+                <span class="text-phare-gold italic font-bold">Guidez votre croissance.</span>
+            </h1>
+            <p class="text-slate-500 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto reveal">
+                Vous avez l'ambition. Nous avons la méthode. Nous transformons votre potentiel en performance réelle.
             </p>
-        </div>
-    </section>
-
-    <!-- PROCESSUS -->
-    <section class="section-spacing bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20 reveal">
-                <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-4">Comment ça fonctionne</p>
-                <h2 class="text-3xl md:text-5xl font-bold text-phare-dark">Notre méthode en 3 étapes.</h2>
-            </div>
-
-            <!-- Desktop -->
-            <div class="hidden md:grid md:grid-cols-3 gap-0 relative">
-                <div class="absolute top-7 left-[calc(16.66%+28px)] right-[calc(16.66%+28px)] h-0.5 bg-gradient-to-r from-phare-gold via-phare-gold/40 to-phare-gold/10 z-0"></div>
-
-                <div class="step-card reveal-left flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
-                    <div class="step-number mb-8">1</div>
-                    <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
-                    <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Diagnostic</h4>
-                    <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">
-                        Audit complet de votre situation commerciale, vos process, vos équipes et vos objectifs de croissance.
-                    </p>
-                </div>
-
-                <div class="step-card reveal flex flex-col items-center text-center px-8 pt-0 pb-10 relative" style="transition-delay:0.15s">
-                    <div class="step-number mb-8">2</div>
-                    <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
-                    <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Stratégie</h4>
-                    <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">
-                        Élaboration d'un plan d'action sur-mesure, avec des jalons clairs et des indicateurs de performance précis.
-                    </p>
-                </div>
-
-                <div class="step-card reveal-right flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
-                    <div class="step-number mb-8">3</div>
-                    <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
-                    <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Exécution</h4>
-                    <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">
-                        Déploiement terrain avec un suivi hebdomadaire, des ajustements en continu et des résultats mesurables.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Mobile -->
-            <div class="flex flex-col gap-0 md:hidden">
-                <div class="flex gap-6 items-start pb-10 relative">
-                    <div class="flex flex-col items-center flex-shrink-0">
-                        <div class="step-number">1</div>
-                        <div class="w-0.5 flex-1 bg-phare-gold/20 mt-4" style="min-height:60px"></div>
-                    </div>
-                    <div class="pt-3 pb-4">
-                        <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Diagnostic</h4>
-                        <p class="text-slate-500 font-light leading-relaxed text-sm">Audit complet de votre situation commerciale, vos process, vos équipes et vos objectifs.</p>
-                    </div>
-                </div>
-                <div class="flex gap-6 items-start pb-10 relative">
-                    <div class="flex flex-col items-center flex-shrink-0">
-                        <div class="step-number">2</div>
-                        <div class="w-0.5 flex-1 bg-phare-gold/20 mt-4" style="min-height:60px"></div>
-                    </div>
-                    <div class="pt-3 pb-4">
-                        <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Stratégie</h4>
-                        <p class="text-slate-500 font-light leading-relaxed text-sm">Plan d'action sur-mesure avec jalons clairs et indicateurs de performance précis.</p>
-                    </div>
-                </div>
-                <div class="flex gap-6 items-start">
-                    <div class="flex flex-col items-center flex-shrink-0">
-                        <div class="step-number">3</div>
-                    </div>
-                    <div class="pt-3">
-                        <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Exécution</h4>
-                        <p class="text-slate-500 font-light leading-relaxed text-sm">Déploiement terrain avec suivi hebdomadaire, ajustements continus et résultats mesurables.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-center mt-16 reveal">
-                <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="cta-button border-2 border-phare-gold text-phare-dark px-10 py-4 rounded-full font-bold text-sm md:text-base hover:bg-phare-gold transition-colors duration-300 inline-flex items-center gap-2">
-                    Démarrer mon diagnostic
+            <div class="pt-2 reveal">
+                <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="hero-cta" class="cta-button bg-phare-gold text-phare-dark px-10 py-5 rounded-full font-bold text-base md:text-lg shadow-xl inline-flex items-center justify-center text-center hover:bg-yellow-600">
+                    Planifier un appel avec un expert
                 </a>
             </div>
         </div>
-    </section>
 
-    <!-- SERVICES -->
-    <section class="section-spacing bg-slate-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl md:text-5xl font-bold text-center mb-24 reveal text-phare-dark">Des solutions pour chaque étape.</h2>
+    </div>
+</section>
 
-            <div class="grid lg:grid-cols-2 gap-10 md:gap-14">
+<!-- MISSION -->
+<section class="section-spacing bg-phare-dark relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-6 text-center reveal">
+        <h2 class="text-phare-gold text-sm md:text-lg font-medium tracking-[0.3em] uppercase mb-8">Notre Mission</h2>
+        <h3 class="text-3xl md:text-5xl font-bold leading-tight mb-10 text-white">Votre repère dans la tempête.</h3>
+        <p class="text-slate-300 text-lg md:text-xl font-light leading-relaxed mb-12">
+            Le marché est en perpétuel mouvement. Dans cette complexité, vous avez besoin d'une vision claire. Nous avons choisi le nom <strong class="text-white">Phare</strong> car nous sommes votre guide : nous apportons un cap et une arrivée à bon port.
+        </p>
+        <!-- Chiffre discret -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-3 border border-phare-gold/20 rounded-full px-7 py-3">
+            <span class="text-phare-gold font-bold text-sm tracking-wide">
+                + <span id="counter" data-target="3000000">0</span> €
+            </span>
+            <span class="w-px h-4 bg-phare-gold/30 hidden sm:block"></span>
+            <span class="text-slate-400 text-sm font-light italic">générés pour nos clients en <strong class="text-slate-300 font-semibold not-italic">seulement 2 ans</strong></span>
+        </div>
+    </div>
+</section>
 
-                <div id="ventes" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
-                    <div class="text-phare-gold text-4xl mb-6">👥</div>
-                    <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Force de Vente Sup.</h4>
-                    <p class="text-slate-600 font-light leading-relaxed">Mise à disposition immédiate d'agents commerciaux expérimentés pour booster vos résultats.</p>
-                </div>
+<!-- PROCESSUS -->
+<section class="section-spacing bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20 reveal">
+            <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-4">Comment ça fonctionne</p>
+            <h2 class="text-3xl md:text-5xl font-bold text-phare-dark">Notre méthode en 3 étapes.</h2>
+        </div>
 
-                <div id="conseil" class="service-card-featured bg-phare-dark p-10 rounded-2xl shadow-2xl reveal reveal-stagger border-4 border-phare-gold text-white relative">
-                    <div class="absolute -top-5 -right-3 bg-phare-gold text-phare-dark px-6 py-2 rounded-lg font-extrabold text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_20px_rgba(197,160,101,0.5)] z-10 border border-white/30 transform rotate-2">
-                        Le plus choisi
-                    </div>
-                    <div class="text-phare-gold text-4xl mb-6">🧭</div>
-                    <h4 class="text-xl font-bold uppercase mb-4">Conseil & Opérations</h4>
-                    <p class="text-slate-300 font-light leading-relaxed">Audit de vos process et implémentation terrain pour sécuriser votre croissance.</p>
-                </div>
-
-                <div id="branche" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
-                    <div class="text-phare-gold text-4xl mb-6">🏗️</div>
-                    <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Création de Branche</h4>
-                    <p class="text-slate-600 font-light leading-relaxed">Bâtissons votre département commercial de A à Z : recrutement et process de vente.</p>
-                </div>
-
-                <div id="coaching" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
-                    <div class="text-phare-gold text-4xl mb-6">📈</div>
-                    <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Coaching Équipe</h4>
-                    <p class="text-slate-600 font-light leading-relaxed">Transformation de vos équipes en machines de vente grâce à un accompagnement terrain.</p>
-                </div>
-
-                <div id="marketing" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100 lg:col-span-2">
-                    <div class="flex flex-col md:flex-row md:items-center gap-6">
-                        <div class="text-phare-gold text-4xl flex-shrink-0">📣</div>
-                        <div>
-                            <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Force Marketing Sup.</h4>
-                            <p class="text-slate-600 font-light leading-relaxed">
-                                Marketing et commerce sont indissociables. Nous déployons des actions marketing en phase avec votre réalité terrain : ce que vos commerciaux vivent sur le terrain guide notre communication, et nos campagnes alimentent directement votre force de vente.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
+        <!-- Desktop -->
+        <div class="hidden md:grid md:grid-cols-3 gap-0 relative">
+            <div class="absolute top-7 left-[calc(16.66%+28px)] right-[calc(16.66%+28px)] h-0.5 bg-gradient-to-r from-phare-gold via-phare-gold/40 to-phare-gold/10 z-0"></div>
+            <div class="step-card reveal-left flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
+                <div class="step-number mb-8">1</div>
+                <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
+                <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Diagnostic</h4>
+                <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">Audit complet de votre situation commerciale, vos process, vos équipes et vos objectifs de croissance.</p>
+            </div>
+            <div class="step-card reveal flex flex-col items-center text-center px-8 pt-0 pb-10 relative" style="transition-delay:0.15s">
+                <div class="step-number mb-8">2</div>
+                <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
+                <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Stratégie</h4>
+                <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">Élaboration d'un plan d'action sur-mesure, avec des jalons clairs et des indicateurs de performance précis.</p>
+            </div>
+            <div class="step-card reveal-right flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
+                <div class="step-number mb-8">3</div>
+                <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
+                <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Exécution</h4>
+                <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">Déploiement terrain avec un suivi hebdomadaire, des ajustements en continu et des résultats mesurables.</p>
             </div>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="py-16 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
-            <div class="space-y-4">
-                <img src="logo.png" alt="Phare" class="h-14 md:h-20 w-auto mx-auto md:mx-0">
-                <p class="text-slate-600 font-medium">Florian | Fondateur & Dirigeant</p>
-                <p class="text-slate-600 italic">"Un cap clair, une arrivée à bon port."</p>
+        <!-- Mobile -->
+        <div class="flex flex-col gap-0 md:hidden">
+            <div class="flex gap-6 items-start pb-10">
+                <div class="flex flex-col items-center flex-shrink-0">
+                    <div class="step-number">1</div>
+                    <div class="w-0.5 flex-1 bg-phare-gold/20 mt-4" style="min-height:60px"></div>
+                </div>
+                <div class="pt-3 pb-4">
+                    <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Diagnostic</h4>
+                    <p class="text-slate-500 font-light leading-relaxed text-sm">Audit complet de votre situation commerciale, vos process, vos équipes et vos objectifs.</p>
+                </div>
             </div>
-            <div class="text-slate-600">
-                <p>✉️ <a href="mailto:florian@phare-co.fr" class="hover:text-phare-gold transition-colors">florian@phare-co.fr</a></p>
+            <div class="flex gap-6 items-start pb-10">
+                <div class="flex flex-col items-center flex-shrink-0">
+                    <div class="step-number">2</div>
+                    <div class="w-0.5 flex-1 bg-phare-gold/20 mt-4" style="min-height:60px"></div>
+                </div>
+                <div class="pt-3 pb-4">
+                    <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Stratégie</h4>
+                    <p class="text-slate-500 font-light leading-relaxed text-sm">Plan d'action sur-mesure avec jalons clairs et indicateurs de performance précis.</p>
+                </div>
+            </div>
+            <div class="flex gap-6 items-start">
+                <div class="flex-shrink-0"><div class="step-number">3</div></div>
+                <div class="pt-3">
+                    <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Exécution</h4>
+                    <p class="text-slate-500 font-light leading-relaxed text-sm">Déploiement terrain avec suivi hebdomadaire, ajustements continus et résultats mesurables.</p>
+                </div>
             </div>
         </div>
-    </footer>
 
-    <!-- FLOATING CTA -->
-    <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="floating-cta" class="cta-button fixed bottom-8 left-1/2 -translate-x-1/2 md:bottom-10 md:left-auto md:right-10 md:translate-x-0 z-50 w-[90%] max-w-[350px] md:w-auto bg-phare-gold hover:bg-yellow-600 text-phare-dark px-6 py-4 rounded-full font-bold text-sm md:text-base text-center shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 flex items-center justify-center">
-        Planifier un appel expert
-    </a>
+        <div class="flex justify-center mt-16 reveal">
+            <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="cta-button border-2 border-phare-gold text-phare-dark px-10 py-4 rounded-full font-bold text-sm md:text-base hover:bg-phare-gold transition-colors duration-300 inline-flex items-center gap-2">
+                Démarrer mon diagnostic
+            </a>
+        </div>
+    </div>
+</section>
 
-    <script>
-        /* Mobile menu */
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const chevron = document.getElementById('menu-chevron');
+<!-- SERVICES -->
+<section class="section-spacing bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl md:text-5xl font-bold text-center mb-24 reveal text-phare-dark">Des solutions pour chaque étape.</h2>
 
-        btn.addEventListener('click', () => {
-            const isHidden = menu.classList.toggle('hidden');
-            chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+        <div class="grid lg:grid-cols-2 gap-10 md:gap-14">
+
+            <div id="ventes" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
+                <div class="text-phare-gold text-4xl mb-6">👥</div>
+                <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Force de Vente Sup.</h4>
+                <p class="text-slate-600 font-light leading-relaxed">Mise à disposition immédiate d'agents commerciaux expérimentés pour booster vos résultats.</p>
+            </div>
+
+            <div id="conseil" class="service-card-featured bg-phare-dark p-10 rounded-2xl shadow-2xl reveal reveal-stagger border-4 border-phare-gold text-white relative">
+                <div class="absolute -top-5 -right-3 bg-phare-gold text-phare-dark px-6 py-2 rounded-lg font-extrabold text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_20px_rgba(197,160,101,0.5)] z-10 border border-white/30 transform rotate-2">
+                    Le plus choisi
+                </div>
+                <div class="text-phare-gold text-4xl mb-6">🧭</div>
+                <h4 class="text-xl font-bold uppercase mb-4">Conseil & Opérations</h4>
+                <p class="text-slate-300 font-light leading-relaxed">Audit de vos process et implémentation terrain pour sécuriser votre croissance.</p>
+            </div>
+
+            <div id="branche" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
+                <div class="text-phare-gold text-4xl mb-6">🏗️</div>
+                <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Création de Branche</h4>
+                <p class="text-slate-600 font-light leading-relaxed">Bâtissons votre département commercial de A à Z : recrutement et process de vente.</p>
+            </div>
+
+            <div id="coaching" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
+                <div class="text-phare-gold text-4xl mb-6">📈</div>
+                <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Coaching Équipe</h4>
+                <p class="text-slate-600 font-light leading-relaxed">Transformation de vos équipes en machines de vente grâce à un accompagnement terrain.</p>
+            </div>
+
+            <div id="marketing" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100 lg:col-span-2">
+                <div class="flex flex-col md:flex-row md:items-center gap-6">
+                    <div class="text-phare-gold text-4xl flex-shrink-0">📣</div>
+                    <div>
+                        <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Force Marketing Sup.</h4>
+                        <p class="text-slate-600 font-light leading-relaxed">Marketing et commerce sont indissociables. Nous déployons des actions marketing en phase avec votre réalité terrain : ce que vos commerciaux vivent sur le terrain guide notre communication, et nos campagnes alimentent directement votre force de vente.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-16 bg-white border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
+        <div class="space-y-4">
+            <img src="logo.png" alt="Phare" class="h-14 md:h-20 w-auto mx-auto md:mx-0">
+            <p class="text-slate-600 font-medium">Florian | Fondateur & Dirigeant</p>
+            <p class="text-slate-600 italic">"Un cap clair, une arrivée à bon port."</p>
+        </div>
+        <div class="text-slate-600">
+            <p>✉️ <a href="mailto:florian@phare-co.fr" class="hover:text-phare-gold transition-colors">florian@phare-co.fr</a></p>
+        </div>
+    </div>
+</footer>
+
+<!-- FLOATING CTA -->
+<a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="floating-cta" class="cta-button fixed bottom-8 left-1/2 -translate-x-1/2 md:bottom-10 md:left-auto md:right-10 md:translate-x-0 z-50 w-[90%] max-w-[350px] md:w-auto bg-phare-gold hover:bg-yellow-600 text-phare-dark px-6 py-4 rounded-full font-bold text-sm md:text-base text-center shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 flex items-center justify-center">
+    Planifier un appel expert
+</a>
+
+<script>
+    /* Mobile menu */
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const chevron = document.getElementById('menu-chevron');
+    btn.addEventListener('click', () => {
+        const isHidden = menu.classList.toggle('hidden');
+        chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            chevron.style.transform = 'rotate(0deg)';
         });
+    });
 
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-                chevron.style.transform = 'rotate(0deg)';
-            });
-        });
-
-        /* Compteur animé */
-        function animateCounter() {
-            const counter = document.getElementById('counter');
-            const target = +counter.getAttribute('data-target');
-            const duration = 2500;
-            let startTime = null;
-
-            const update = (currentTime) => {
-                if (!startTime) startTime = currentTime;
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easeProgress = 1 - Math.pow(1 - progress, 3);
-                const currentNum = Math.floor(target * easeProgress);
-                counter.innerText = currentNum.toString().padStart(7, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-                if (progress < 1) requestAnimationFrame(update);
-            };
-            requestAnimationFrame(update);
-        }
-
-        /* Intersection Observer */
-        const observerOptions = { threshold: 0.1 };
-
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
-            revealObserver.observe(el);
-        });
-
-        /* Floating CTA */
-        const floatingCta = document.getElementById('floating-cta');
-        const heroCta = document.getElementById('hero-cta');
-
-        window.addEventListener('scroll', () => {
-            const heroCtaBottom = heroCta.getBoundingClientRect().bottom;
-            if (heroCtaBottom < 0) {
-                floatingCta.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-                floatingCta.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-            } else {
-                floatingCta.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-                floatingCta.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+    /* Compteur — se déclenche quand visible */
+    function animateCounter() {
+        const el = document.getElementById('counter');
+        const target = +el.getAttribute('data-target');
+        const duration = 2200;
+        let startTime = null;
+        const update = (now) => {
+            if (!startTime) startTime = now;
+            const p = Math.min((now - startTime) / duration, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            const val = Math.floor(target * ease);
+            el.textContent = val.toLocaleString('fr-FR');
+            if (p < 1) requestAnimationFrame(update);
+        };
+        const obs = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                requestAnimationFrame(update);
+                obs.disconnect();
             }
-        }, { passive: true });
+        }, { threshold: 0.5 });
+        obs.observe(el);
+    }
 
-        window.onload = animateCounter;
-    </script>
+    /* Reveal */
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+    /* Floating CTA */
+    const floatingCta = document.getElementById('floating-cta');
+    const heroCta = document.getElementById('hero-cta');
+    window.addEventListener('scroll', () => {
+        const below = heroCta.getBoundingClientRect().bottom < 0;
+        if (below) {
+            floatingCta.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+            floatingCta.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        } else {
+            floatingCta.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+            floatingCta.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+        }
+    }, { passive: true });
+
+    window.onload = animateCounter;
+</script>
 </body>
 </html>
