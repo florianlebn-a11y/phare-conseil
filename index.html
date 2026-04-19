@@ -23,6 +23,21 @@
         html { scroll-behavior: smooth; }
         body { color: #2D3748; background-color: #ffffff; overflow-x: hidden; }
 
+        /* ── Scroll offset pour nav fixe ── */
+        #ventes, #conseil, #branche, #coaching, #marketing {
+            scroll-margin-top: 72px;
+        }
+        @media (min-width: 640px) {
+            #ventes, #conseil, #branche, #coaching, #marketing {
+                scroll-margin-top: 88px;
+            }
+        }
+        @media (min-width: 768px) {
+            #ventes, #conseil, #branche, #coaching, #marketing {
+                scroll-margin-top: 104px;
+            }
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -103,6 +118,25 @@
             height: 1px;
             background: rgba(197,160,101,0.35);
         }
+
+        /* Nav height : 64px mobile, 80px sm, 96px md */
+        .hero-section {
+            min-height: 100svh;
+            padding-top: calc(64px + 1rem);
+            padding-bottom: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .hero-section {
+                padding-top: calc(80px + 1.5rem);
+                padding-bottom: 2rem;
+            }
+        }
+        @media (min-width: 768px) {
+            .hero-section {
+                padding-top: calc(96px + 2rem);
+                padding-bottom: 4rem;
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -153,12 +187,12 @@
     </nav>
 
     <!-- HERO -->
-    <section class="min-h-screen bg-white flex items-center pt-28 pb-10 md:pt-32 md:pb-16">
-        <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-8 md:gap-10 items-center justify-center">
+    <section class="hero-section bg-white flex items-center">
+        <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-6 md:gap-10 items-center justify-center">
 
             <!-- 1. Compteur -->
             <div class="w-full flex flex-col items-center">
-                <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-4 text-center">
+                <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-3 md:mb-4 text-center">
                     Chiffre d'affaires généré
                 </p>
                 <div class="flex items-baseline font-bold tabular-nums whitespace-nowrap text-phare-dark">
@@ -168,7 +202,7 @@
                     </span>
                     <span class="text-4xl md:text-6xl lg:text-7xl ml-3">€</span>
                 </div>
-                <p class="text-slate-500 text-sm md:text-lg mt-4 italic text-center">
+                <p class="text-slate-500 text-sm md:text-lg mt-3 md:mt-4 italic text-center">
                     pour nos clients <span class="text-phare-dark font-bold">en seulement 2 ans</span>
                 </p>
             </div>
@@ -177,7 +211,7 @@
             <div class="hero-divider"></div>
 
             <!-- 2. Titre + CTA -->
-            <div class="space-y-6 w-full max-w-4xl text-center">
+            <div class="space-y-4 md:space-y-6 w-full max-w-4xl text-center">
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-phare-dark leading-tight tracking-tight">
                     Ne naviguez plus à vue.<br>
                     <span class="text-phare-gold italic font-bold">Guidez votre croissance.</span>
@@ -185,7 +219,7 @@
                 <p class="text-slate-500 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
                     Vous avez l'ambition. Nous avons la méthode. Nous transformons votre potentiel en performance réelle.
                 </p>
-                <div class="pt-2">
+                <div class="pt-1 md:pt-2">
                     <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="hero-cta" class="cta-button bg-phare-gold text-phare-dark px-10 py-5 rounded-full font-bold text-base md:text-lg shadow-xl inline-flex items-center justify-center text-center hover:bg-yellow-600">
                         Planifier un appel avec un expert
                     </a>
