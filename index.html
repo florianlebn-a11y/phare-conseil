@@ -22,31 +22,105 @@
     <style>
         html { scroll-behavior: smooth; }
         body { color: #2D3748; background-color: #ffffff; overflow-x: hidden; }
-        
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+
+        /* ── Reveal animations ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        
+
+        /* Stagger delays for card grids */
+        .reveal-stagger:nth-child(1) { transition-delay: 0s; }
+        .reveal-stagger:nth-child(2) { transition-delay: 0.12s; }
+        .reveal-stagger:nth-child(3) { transition-delay: 0.24s; }
+        .reveal-stagger:nth-child(4) { transition-delay: 0.36s; }
+        .reveal-stagger:nth-child(5) { transition-delay: 0.48s; }
+
+        /* Reveal from left */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-left.active { opacity: 1; transform: translateX(0); }
+
+        /* Reveal from right */
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-right.active { opacity: 1; transform: translateX(0); }
+
         .section-spacing { padding-top: 8rem; padding-bottom: 8rem; }
-        
+
         .nav-link { position: relative; transition: color 0.3s; }
         .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -6px; left: 0; background-color: #C5A065; transition: width 0.3s; }
         .nav-link:hover::after { width: 100%; }
 
         .cta-button { position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-        .cta-button::after { 
-            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%; 
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%); 
-            transform: skewX(-20deg); animation: shine 5s infinite; 
+        .cta-button::after {
+            content: ''; position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg); animation: shine 5s infinite;
         }
         @keyframes shine { 0% { left: -150%; } 15% { left: 150%; } 100% { left: 150%; } }
         .cta-button:hover { transform: translateY(-4px) scale(1.02); }
+
+        /* ── Processus timeline ── */
+        .step-number {
+            width: 56px; height: 56px;
+            border: 2px solid #C5A065;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem; font-weight: 800;
+            color: #C5A065;
+            background: #ffffff;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            transition: background 0.4s, color 0.4s;
+        }
+        .step-card:hover .step-number {
+            background: #C5A065;
+            color: #1A2332;
+        }
+        .step-connector {
+            position: absolute;
+            top: 28px;
+            left: calc(50% + 28px);
+            width: calc(100% - 56px);
+            height: 2px;
+            background: linear-gradient(to right, #C5A065, rgba(197,160,101,0.2));
+        }
+
+        /* ── Service card hover ── */
+        .service-card {
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .service-card-featured {
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .service-card-featured:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(197,160,101,0.25);
+        }
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- ══════════════════════════════════════
+         NAV
+    ══════════════════════════════════════ -->
     <nav class="fixed w-full z-50 bg-phare-dark/95 backdrop-blur-md shadow-lg">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 flex justify-between items-stretch h-16 sm:h-20 md:h-24 relative">
-            
+
             <a href="#" class="relative flex items-center pr-14 sm:pr-8 md:pr-16 pl-4 sm:pl-6 -ml-2 sm:-ml-6 flex-shrink-0 group">
                 <div class="absolute inset-y-0 right-0 w-[100vw] bg-white z-0" style="clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%);"></div>
                 <img src="logo.png" alt="Phare" class="h-14 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[150px] sm:max-w-none object-contain relative z-10 transform scale-110 sm:scale-100 origin-left group-hover:scale-105 transition-transform">
@@ -76,6 +150,7 @@
             </div>
         </div>
 
+        <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-phare-dark border-t border-white/10 shadow-2xl">
             <div class="flex flex-col px-6 py-4 space-y-5 text-xs font-bold uppercase tracking-widest text-white">
                 <a href="#ventes" class="mobile-link hover:text-phare-gold">Force de vente sup.</a>
@@ -87,14 +162,16 @@
         </div>
     </nav>
 
+    <!-- ══════════════════════════════════════
+         HERO
+    ══════════════════════════════════════ -->
     <section class="min-h-screen bg-white flex items-center pt-32 pb-16 md:pt-40 md:pb-24">
         <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-12 md:gap-20 items-center justify-center">
-            
+
             <div class="w-full flex flex-col items-center">
                 <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-6 text-center">
                     Chiffre d'affaires généré
                 </p>
-                
                 <div class="flex items-baseline font-bold tabular-nums whitespace-nowrap text-phare-dark">
                     <span class="text-4xl md:text-6xl lg:text-7xl mr-2">+</span>
                     <span class="text-[3.5rem] sm:text-7xl md:text-[7rem] lg:text-[8.5rem] xl:text-[10rem] leading-none text-phare-gold" id="counter" data-target="3000000">
@@ -102,7 +179,6 @@
                     </span>
                     <span class="text-4xl md:text-6xl lg:text-7xl ml-3">€</span>
                 </div>
-
                 <p class="text-slate-500 text-sm md:text-lg mt-8 italic text-center">
                     pour nos clients <span class="text-phare-dark font-bold">en seulement 2 ans</span>
                 </p>
@@ -122,10 +198,12 @@
                     </a>
                 </div>
             </div>
-            
         </div>
     </section>
 
+    <!-- ══════════════════════════════════════
+         MISSION
+    ══════════════════════════════════════ -->
     <section class="section-spacing bg-phare-dark relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-6 text-center reveal">
             <h2 class="text-phare-gold text-sm md:text-lg font-medium tracking-[0.3em] uppercase mb-8">Notre Mission</h2>
@@ -136,42 +214,151 @@
         </div>
     </section>
 
+    <!-- ══════════════════════════════════════
+         PROCESSUS — NOUVELLE SECTION
+    ══════════════════════════════════════ -->
+    <section class="section-spacing bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-4">Comment ça fonctionne</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-phare-dark">Notre méthode en 3 étapes.</h2>
+            </div>
+
+            <!-- Desktop : ligne de connexion + étapes -->
+            <div class="hidden md:grid md:grid-cols-3 gap-0 relative">
+
+                <!-- Ligne de connexion -->
+                <div class="absolute top-7 left-[calc(16.66%+28px)] right-[calc(16.66%+28px)] h-0.5 bg-gradient-to-r from-phare-gold via-phare-gold/40 to-phare-gold/10 z-0"></div>
+
+                <!-- Étape 1 -->
+                <div class="step-card reveal-left flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
+                    <div class="step-number mb-8">1</div>
+                    <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
+                    <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Diagnostic</h4>
+                    <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">
+                        Audit complet de votre situation commerciale, vos process, vos équipes et vos objectifs de croissance.
+                    </p>
+                </div>
+
+                <!-- Étape 2 -->
+                <div class="step-card reveal flex flex-col items-center text-center px-8 pt-0 pb-10 relative" style="transition-delay:0.15s">
+                    <div class="step-number mb-8">2</div>
+                    <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
+                    <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Stratégie</h4>
+                    <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">
+                        Élaboration d'un plan d'action sur-mesure, avec des jalons clairs et des indicateurs de performance précis.
+                    </p>
+                </div>
+
+                <!-- Étape 3 -->
+                <div class="step-card reveal-right flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
+                    <div class="step-number mb-8">3</div>
+                    <div class="w-10 h-0.5 bg-phare-gold/30 mb-8"></div>
+                    <h4 class="text-lg font-bold text-phare-dark mb-3 uppercase tracking-wide">Exécution</h4>
+                    <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">
+                        Déploiement terrain avec un suivi hebdomadaire, des ajustements en continu et des résultats mesurables.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mobile : vertical -->
+            <div class="flex flex-col gap-0 md:hidden">
+                <div class="flex gap-6 items-start pb-10 relative">
+                    <div class="flex flex-col items-center flex-shrink-0">
+                        <div class="step-number">1</div>
+                        <div class="w-0.5 flex-1 bg-phare-gold/20 mt-4" style="min-height:60px"></div>
+                    </div>
+                    <div class="pt-3 pb-4">
+                        <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Diagnostic</h4>
+                        <p class="text-slate-500 font-light leading-relaxed text-sm">Audit complet de votre situation commerciale, vos process, vos équipes et vos objectifs.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start pb-10 relative">
+                    <div class="flex flex-col items-center flex-shrink-0">
+                        <div class="step-number">2</div>
+                        <div class="w-0.5 flex-1 bg-phare-gold/20 mt-4" style="min-height:60px"></div>
+                    </div>
+                    <div class="pt-3 pb-4">
+                        <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Stratégie</h4>
+                        <p class="text-slate-500 font-light leading-relaxed text-sm">Plan d'action sur-mesure avec jalons clairs et indicateurs de performance précis.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 items-start">
+                    <div class="flex flex-col items-center flex-shrink-0">
+                        <div class="step-number">3</div>
+                    </div>
+                    <div class="pt-3">
+                        <h4 class="text-base font-bold text-phare-dark mb-2 uppercase tracking-wide">Exécution</h4>
+                        <p class="text-slate-500 font-light leading-relaxed text-sm">Déploiement terrain avec suivi hebdomadaire, ajustements continus et résultats mesurables.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA centré -->
+            <div class="flex justify-center mt-16 reveal">
+                <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="cta-button border-2 border-phare-gold text-phare-dark px-10 py-4 rounded-full font-bold text-sm md:text-base hover:bg-phare-gold transition-colors duration-300 inline-flex items-center gap-2">
+                    Démarrer mon diagnostic
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SERVICES
+    ══════════════════════════════════════ -->
     <section class="section-spacing bg-slate-50">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl md:text-5xl font-bold text-center mb-24 reveal text-phare-dark">Des solutions pour chaque étape.</h2>
+
             <div class="grid lg:grid-cols-2 gap-10 md:gap-14">
-                
-                <div id="ventes" class="bg-white p-10 rounded-2xl shadow-sm reveal border border-slate-100">
+
+                <div id="ventes" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
                     <div class="text-phare-gold text-4xl mb-6">👥</div>
                     <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Force de Vente Sup.</h4>
                     <p class="text-slate-600 font-light leading-relaxed">Mise à disposition immédiate d'agents commerciaux expérimentés pour booster vos résultats.</p>
                 </div>
 
-                <div id="conseil" class="bg-phare-dark p-10 rounded-2xl shadow-2xl reveal border-4 border-phare-gold text-white relative">
+                <div id="conseil" class="service-card-featured bg-phare-dark p-10 rounded-2xl shadow-2xl reveal reveal-stagger border-4 border-phare-gold text-white relative">
                     <div class="absolute -top-5 -right-3 bg-phare-gold text-phare-dark px-6 py-2 rounded-lg font-extrabold text-xs md:text-sm uppercase tracking-wider shadow-[0_4px_20px_rgba(197,160,101,0.5)] z-10 border border-white/30 transform rotate-2">
                         Le plus choisi
                     </div>
-                    
                     <div class="text-phare-gold text-4xl mb-6">🧭</div>
                     <h4 class="text-xl font-bold uppercase mb-4">Conseil & Opérations</h4>
                     <p class="text-slate-300 font-light leading-relaxed">Audit de vos process et implémentation terrain pour sécuriser votre croissance.</p>
                 </div>
 
-                <div id="branche" class="bg-white p-10 rounded-2xl shadow-sm reveal border border-slate-100">
+                <div id="branche" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
                     <div class="text-phare-gold text-4xl mb-6">🏗️</div>
                     <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Création de Branche</h4>
                     <p class="text-slate-600 font-light leading-relaxed">Bâtissons votre département commercial de A à Z : recrutement et process de vente.</p>
                 </div>
-                
-                <div id="coaching" class="bg-white p-10 rounded-2xl shadow-sm reveal border border-slate-100">
+
+                <div id="coaching" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
                     <div class="text-phare-gold text-4xl mb-6">📈</div>
                     <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Coaching Équipe</h4>
                     <p class="text-slate-600 font-light leading-relaxed">Transformation de vos équipes en machines de vente grâce à un accompagnement terrain.</p>
                 </div>
+
+                <!-- NOUVELLE CARTE MARKETING — pleine largeur -->
+                <div id="marketing" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100 lg:col-span-2">
+                    <div class="flex flex-col md:flex-row md:items-center gap-6">
+                        <div class="text-phare-gold text-4xl flex-shrink-0">📣</div>
+                        <div>
+                            <h4 class="text-xl font-bold uppercase mb-4 text-phare-dark">Force Marketing Sup.</h4>
+                            <p class="text-slate-600 font-light leading-relaxed">
+                                Déploiement de ressources marketing opérationnelles pour amplifier votre visibilité et accélérer la génération de leads : création de contenus, campagnes ciblées, pilotage des actions terrain.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
+    <!-- ══════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════ -->
     <footer class="py-16 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
             <div class="space-y-4">
@@ -185,23 +372,37 @@
         </div>
     </footer>
 
+    <!-- ══════════════════════════════════════
+         FLOATING CTA
+    ══════════════════════════════════════ -->
     <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="floating-cta" class="cta-button fixed bottom-8 left-1/2 -translate-x-1/2 md:bottom-10 md:left-auto md:right-10 md:translate-x-0 z-50 w-[90%] max-w-[350px] md:w-auto bg-phare-gold hover:bg-yellow-600 text-phare-dark px-6 py-4 rounded-full font-bold text-sm md:text-base text-center shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 flex items-center justify-center">
         Planifier un appel expert
     </a>
 
     <script>
+        /* ── Mobile menu ── */
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const chevron = document.getElementById('menu-chevron');
+
         btn.addEventListener('click', () => {
             const isHidden = menu.classList.toggle('hidden');
             chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
         });
 
+        /* FIX : fermeture du menu mobile au clic sur un lien */
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            });
+        });
+
+        /* ── Compteur animé ── */
         function animateCounter() {
             const counter = document.getElementById('counter');
             const target = +counter.getAttribute('data-target');
-            const duration = 2500; 
+            const duration = 2500;
             let startTime = null;
 
             const update = (currentTime) => {
@@ -210,21 +411,32 @@
                 const progress = Math.min(elapsed / duration, 1);
                 const easeProgress = 1 - Math.pow(1 - progress, 3);
                 const currentNum = Math.floor(target * easeProgress);
-                
                 counter.innerText = currentNum.toString().padStart(7, '0').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-
                 if (progress < 1) requestAnimationFrame(update);
             };
             requestAnimationFrame(update);
         }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        /* ── Intersection Observer (reveal + stagger) ── */
+        const observerOptions = { threshold: 0.1 };
 
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        /* ── Floating CTA ── */
         const floatingCta = document.getElementById('floating-cta');
         const heroCta = document.getElementById('hero-cta');
+
         window.addEventListener('scroll', () => {
             const heroCtaBottom = heroCta.getBoundingClientRect().bottom;
             if (heroCtaBottom < 0) {
@@ -234,7 +446,7 @@
                 floatingCta.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
                 floatingCta.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
             }
-        });
+        }, { passive: true });
 
         window.onload = animateCounter;
     </script>
