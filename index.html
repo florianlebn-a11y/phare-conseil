@@ -76,7 +76,51 @@
         @media (min-width: 640px) { #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 88px; } }
         @media (min-width: 768px) { #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 104px; } }
 
-        /* ── Bouton nav — taille adaptée, jamais coupé ── */
+        /* ── Logo blanc biseauté — cassure plus à gauche sur mobile ── */
+        .nav-logo-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            align-self: stretch;
+            /* mobile : logo + zone blanche plus étroite */
+            padding-left: 8px;
+            padding-right: 36px;
+            margin-left: -8px;
+        }
+        @media (min-width: 640px) {
+            .nav-logo-wrap { padding-left: 24px; padding-right: 32px; margin-left: -24px; }
+        }
+        @media (min-width: 768px) {
+            .nav-logo-wrap { padding-left: 24px; padding-right: 64px; margin-left: -24px; }
+        }
+
+        .nav-logo-bg {
+            position: absolute;
+            inset: 0;
+            background: white;
+            z-index: 0;
+            /* mobile : bande blanche plus étroite → cassure plus à gauche */
+            clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+        }
+
+        .nav-logo-img {
+            position: relative;
+            z-index: 10;
+            object-fit: contain;
+            transform-origin: left center;
+            transition: transform 0.3s;
+            /* mobile */
+            height: 36px;
+            max-width: 110px;
+        }
+        @media (min-width: 400px) { .nav-logo-img { height: 40px; max-width: 130px; } }
+        @media (min-width: 640px) { .nav-logo-img { height: 44px; max-width: 150px; } }
+        @media (min-width: 768px) { .nav-logo-img { height: 58px; max-width: none; } }
+        @media (min-width: 1024px) { .nav-logo-img { height: 72px; } }
+        .nav-logo-wrap:hover .nav-logo-img { transform: scale(1.04); }
+
+        /* ── Bouton Rendez-vous ── */
         .nav-cta {
             display: inline-flex;
             align-items: center;
@@ -89,38 +133,30 @@
             white-space: nowrap;
             flex-shrink: 0;
             transition: background 0.3s;
-            /* Mobile : compact mais entier */
             font-size: 9px;
             padding: 5px 10px;
-            letter-spacing: 0.02em;
         }
-        @media (min-width: 400px) {
-            .nav-cta { font-size: 10px; padding: 6px 12px; }
-        }
-        @media (min-width: 640px) {
-            .nav-cta { font-size: 11px; padding: 8px 16px; }
-        }
-        @media (min-width: 768px) {
-            .nav-cta { font-size: 13px; padding: 10px 28px; }
-        }
+        @media (min-width: 400px) { .nav-cta { font-size: 10px; padding: 5px 12px; } }
+        @media (min-width: 640px) { .nav-cta { font-size: 11px; padding: 7px 16px; } }
+        @media (min-width: 768px) { .nav-cta { font-size: 13px; padding: 10px 28px; } }
         .nav-cta:hover { background: #b8905a; }
     </style>
 </head>
 <body class="antialiased">
 
-<!-- NAV — pas de overflow-hidden, bouton géré par nav-cta -->
+<!-- NAV -->
 <nav class="fixed w-full z-50 bg-phare-dark/95 backdrop-blur-md shadow-lg">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 flex justify-between items-stretch h-16 sm:h-20 md:h-24 relative">
+    <div class="max-w-7xl mx-auto flex justify-between items-stretch h-16 sm:h-20 md:h-24 relative">
 
-        <!-- Logo -->
-        <a href="#" class="relative flex items-center pr-14 sm:pr-8 md:pr-16 pl-4 sm:pl-6 -ml-2 sm:-ml-6 flex-shrink-0 group">
-            <div class="absolute inset-y-0 right-0 w-[100vw] bg-white z-0" style="clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%);"></div>
-            <img src="logo.png" alt="Phare" class="h-14 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[150px] sm:max-w-none object-contain relative z-10 transform scale-110 sm:scale-100 origin-left group-hover:scale-105 transition-transform">
+        <!-- Logo dans rectangle blanc biseauté — plus étroit sur mobile -->
+        <a href="#" class="nav-logo-wrap group">
+            <div class="nav-logo-bg"></div>
+            <img src="logo.png" alt="Phare" class="nav-logo-img">
         </a>
 
-        <!-- Bouton mobile Nos services -->
-        <div class="flex-1 flex justify-center items-center lg:hidden z-20 min-w-0">
-            <button id="mobile-menu-btn" class="text-white px-1 focus:outline-none hover:text-phare-gold font-bold uppercase tracking-widest text-[9px] sm:text-[10px] flex items-center gap-1 whitespace-nowrap">
+        <!-- Bouton Nos services (mobile) -->
+        <div class="flex-1 flex justify-center items-center lg:hidden z-20 px-2">
+            <button id="mobile-menu-btn" class="text-white focus:outline-none hover:text-phare-gold font-bold uppercase tracking-widest text-[9px] sm:text-[10px] flex items-center gap-1 whitespace-nowrap">
                 Nos services
                 <svg class="w-2.5 h-2.5 transition-transform duration-300 flex-shrink-0" id="menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
@@ -137,15 +173,15 @@
             <a href="#marketing" class="nav-link hover:text-phare-gold whitespace-nowrap">Force marketing sup.</a>
         </div>
 
-        <!-- CTA — toujours visible, jamais coupé -->
-        <div class="flex items-center z-10 flex-shrink-0 pl-1 pr-2 sm:pr-0">
+        <!-- CTA -->
+        <div class="flex items-center z-10 flex-shrink-0 pr-3 sm:pr-4 md:pr-6 pl-2">
             <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="nav-cta cta-button">
                 Rendez-vous
             </a>
         </div>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Mobile dropdown -->
     <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-phare-dark border-t border-white/10 shadow-2xl">
         <div class="flex flex-col px-6 py-4 space-y-5 text-xs font-bold uppercase tracking-widest text-white">
             <a href="#ventes"    class="mobile-link hover:text-phare-gold">Force de vente sup.</a>
