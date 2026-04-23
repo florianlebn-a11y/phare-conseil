@@ -23,31 +23,16 @@
         html { scroll-behavior: smooth; }
         body { color: #2D3748; background-color: #ffffff; overflow-x: hidden; }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-
         .reveal-stagger:nth-child(1) { transition-delay: 0s; }
         .reveal-stagger:nth-child(2) { transition-delay: 0.12s; }
         .reveal-stagger:nth-child(3) { transition-delay: 0.24s; }
         .reveal-stagger:nth-child(4) { transition-delay: 0.36s; }
         .reveal-stagger:nth-child(5) { transition-delay: 0.48s; }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .reveal-left.active { opacity: 1; transform: translateX(0); }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .reveal-right.active { opacity: 1; transform: translateX(0); }
 
         .section-spacing { padding-top: 8rem; padding-bottom: 8rem; }
@@ -67,16 +52,10 @@
 
         .step-number {
             width: 56px; height: 56px;
-            border: 2px solid #C5A065;
-            border-radius: 50%;
+            border: 2px solid #C5A065; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.25rem; font-weight: 800;
-            color: #C5A065;
-            background: #ffffff;
-            flex-shrink: 0;
-            position: relative;
-            z-index: 2;
-            transition: background 0.4s, color 0.4s;
+            font-size: 1.25rem; font-weight: 800; color: #C5A065; background: #ffffff;
+            flex-shrink: 0; position: relative; z-index: 2; transition: background 0.4s, color 0.4s;
         }
         .step-card:hover .step-number { background: #C5A065; color: #1A2332; }
 
@@ -97,43 +76,50 @@
         @media (min-width: 640px) { #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 88px; } }
         @media (min-width: 768px) { #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 104px; } }
 
-        /* ── Fix CTA nav ── */
+        /* ── Bouton nav — taille adaptée, jamais coupé ── */
         .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background: #C5A065;
             color: #1A2332;
             border-radius: 9999px;
-            font-weight: 600;
             font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
             white-space: nowrap;
             flex-shrink: 0;
             transition: background 0.3s;
-            /* taille mobile */
-            padding: 6px 14px;
-            font-size: 10px;
-            /* marge droite pour ne pas coller au bord sur mobile */
-            margin-right: 6px;
+            /* Mobile : compact mais entier */
+            font-size: 9px;
+            padding: 5px 10px;
+            letter-spacing: 0.02em;
+        }
+        @media (min-width: 400px) {
+            .nav-cta { font-size: 10px; padding: 6px 12px; }
         }
         @media (min-width: 640px) {
-            .nav-cta { padding: 8px 18px; font-size: 11px; margin-right: 0; }
+            .nav-cta { font-size: 11px; padding: 8px 16px; }
         }
         @media (min-width: 768px) {
-            .nav-cta { padding: 10px 28px; font-size: 13px; }
+            .nav-cta { font-size: 13px; padding: 10px 28px; }
         }
         .nav-cta:hover { background: #b8905a; }
     </style>
 </head>
 <body class="antialiased">
 
-<!-- NAV -->
-<nav class="fixed w-full z-50 bg-phare-dark/95 backdrop-blur-md shadow-lg overflow-hidden">
+<!-- NAV — pas de overflow-hidden, bouton géré par nav-cta -->
+<nav class="fixed w-full z-50 bg-phare-dark/95 backdrop-blur-md shadow-lg">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 flex justify-between items-stretch h-16 sm:h-20 md:h-24 relative">
 
+        <!-- Logo -->
         <a href="#" class="relative flex items-center pr-14 sm:pr-8 md:pr-16 pl-4 sm:pl-6 -ml-2 sm:-ml-6 flex-shrink-0 group">
             <div class="absolute inset-y-0 right-0 w-[100vw] bg-white z-0" style="clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%);"></div>
             <img src="logo.png" alt="Phare" class="h-14 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[150px] sm:max-w-none object-contain relative z-10 transform scale-110 sm:scale-100 origin-left group-hover:scale-105 transition-transform">
         </a>
 
-        <div class="flex-1 flex justify-center items-center lg:hidden z-20">
+        <!-- Bouton mobile Nos services -->
+        <div class="flex-1 flex justify-center items-center lg:hidden z-20 min-w-0">
             <button id="mobile-menu-btn" class="text-white px-1 focus:outline-none hover:text-phare-gold font-bold uppercase tracking-widest text-[9px] sm:text-[10px] flex items-center gap-1 whitespace-nowrap">
                 Nos services
                 <svg class="w-2.5 h-2.5 transition-transform duration-300 flex-shrink-0" id="menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,6 +128,7 @@
             </button>
         </div>
 
+        <!-- Liens desktop -->
         <div class="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8 px-6 xl:px-12 text-[10px] xl:text-xs font-bold uppercase tracking-widest text-white relative z-10">
             <a href="#ventes"    class="nav-link hover:text-phare-gold whitespace-nowrap">Force de vente sup.</a>
             <a href="#conseil"   class="nav-link hover:text-phare-gold whitespace-nowrap">Conseil</a>
@@ -150,13 +137,15 @@
             <a href="#marketing" class="nav-link hover:text-phare-gold whitespace-nowrap">Force marketing sup.</a>
         </div>
 
-        <div class="flex items-center relative z-10 pl-1 flex-shrink-0">
+        <!-- CTA — toujours visible, jamais coupé -->
+        <div class="flex items-center z-10 flex-shrink-0 pl-1 pr-2 sm:pr-0">
             <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="nav-cta cta-button">
                 Rendez-vous
             </a>
         </div>
     </div>
 
+    <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-phare-dark border-t border-white/10 shadow-2xl">
         <div class="flex flex-col px-6 py-4 space-y-5 text-xs font-bold uppercase tracking-widest text-white">
             <a href="#ventes"    class="mobile-link hover:text-phare-gold">Force de vente sup.</a>
@@ -171,7 +160,6 @@
 <!-- HERO -->
 <section class="hero-section bg-white flex items-center">
     <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-6 md:gap-8 items-center justify-center text-center">
-
         <div class="space-y-5 md:space-y-7 w-full max-w-4xl">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-phare-dark leading-tight tracking-tight reveal">
                 Ne naviguez plus à vue.<br>
@@ -186,7 +174,6 @@
                 </a>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -215,8 +202,6 @@
             <p class="text-phare-gold uppercase tracking-[0.2em] font-semibold text-xs md:text-sm mb-4">Comment ça fonctionne</p>
             <h2 class="text-3xl md:text-5xl font-bold text-phare-dark">Notre méthode en 3 étapes.</h2>
         </div>
-
-        <!-- Desktop -->
         <div class="hidden md:grid md:grid-cols-3 gap-0 relative">
             <div class="absolute top-7 left-[calc(16.66%+28px)] right-[calc(16.66%+28px)] h-0.5 bg-gradient-to-r from-phare-gold via-phare-gold/40 to-phare-gold/10 z-0"></div>
             <div class="step-card reveal-left flex flex-col items-center text-center px-8 pt-0 pb-10 relative">
@@ -238,8 +223,6 @@
                 <p class="text-slate-500 font-light leading-relaxed text-sm md:text-base">Déploiement terrain avec un suivi hebdomadaire, des ajustements en continu et des résultats mesurables.</p>
             </div>
         </div>
-
-        <!-- Mobile -->
         <div class="flex flex-col gap-0 md:hidden">
             <div class="flex gap-6 items-start pb-10">
                 <div class="flex flex-col items-center flex-shrink-0">
@@ -269,7 +252,6 @@
                 </div>
             </div>
         </div>
-
         <div class="flex justify-center mt-16 reveal">
             <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="cta-button border-2 border-phare-gold text-phare-dark px-10 py-4 rounded-full font-bold text-sm md:text-base hover:bg-phare-gold transition-colors duration-300 inline-flex items-center gap-2">
                 Démarrer mon diagnostic
@@ -282,7 +264,6 @@
 <section class="section-spacing bg-slate-50">
     <div class="max-w-7xl mx-auto px-6">
         <h2 class="text-3xl md:text-5xl font-bold text-center mb-24 reveal text-phare-dark">Des solutions pour chaque étape.</h2>
-
         <div class="grid lg:grid-cols-2 gap-10 md:gap-14">
 
             <div id="ventes" class="service-card bg-white p-10 rounded-2xl shadow-sm reveal reveal-stagger border border-slate-100">
@@ -321,7 +302,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
