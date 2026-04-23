@@ -23,31 +23,16 @@
         html { scroll-behavior: smooth; }
         body { color: #2D3748; background-color: #ffffff; overflow-x: hidden; }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-
         .reveal-stagger:nth-child(1) { transition-delay: 0s; }
         .reveal-stagger:nth-child(2) { transition-delay: 0.12s; }
         .reveal-stagger:nth-child(3) { transition-delay: 0.24s; }
         .reveal-stagger:nth-child(4) { transition-delay: 0.36s; }
         .reveal-stagger:nth-child(5) { transition-delay: 0.48s; }
-
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .reveal-left.active { opacity: 1; transform: translateX(0); }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
+        .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .reveal-right.active { opacity: 1; transform: translateX(0); }
 
         .section-spacing { padding-top: 8rem; padding-bottom: 8rem; }
@@ -67,16 +52,10 @@
 
         .step-number {
             width: 56px; height: 56px;
-            border: 2px solid #C5A065;
-            border-radius: 50%;
+            border: 2px solid #C5A065; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.25rem; font-weight: 800;
-            color: #C5A065;
-            background: #ffffff;
-            flex-shrink: 0;
-            position: relative;
-            z-index: 2;
-            transition: background 0.4s, color 0.4s;
+            font-size: 1.25rem; font-weight: 800; color: #C5A065; background: #ffffff;
+            flex-shrink: 0; position: relative; z-index: 2; transition: background 0.4s, color 0.4s;
         }
         .step-card:hover .step-number { background: #C5A065; color: #1A2332; }
 
@@ -90,31 +69,61 @@
             padding-top: calc(64px + 1rem);
             padding-bottom: 1.5rem;
         }
-        @media (min-width: 640px) {
-            .hero-section { padding-top: calc(80px + 1.5rem); padding-bottom: 2rem; }
-        }
-        @media (min-width: 768px) {
-            .hero-section { padding-top: calc(96px + 2rem); padding-bottom: 4rem; }
-        }
+        @media (min-width: 640px) { .hero-section { padding-top: calc(80px + 1.5rem); padding-bottom: 2rem; } }
+        @media (min-width: 768px) { .hero-section { padding-top: calc(96px + 2rem); padding-bottom: 4rem; } }
 
-        #ventes, #conseil, #branche, #coaching, #marketing { scroll-margin-top: 72px; }
+        #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 72px; }
         @media (min-width: 640px) { #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 88px; } }
         @media (min-width: 768px) { #ventes,#conseil,#branche,#coaching,#marketing { scroll-margin-top: 104px; } }
+
+        /* ── Nav RDV fix ── */
+        .nav-rdv {
+            flex-shrink: 0;
+            white-space: nowrap;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            background: #C5A065;
+            color: #1A2332;
+            border-radius: 9999px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+            transition: background 0.3s, transform 0.3s;
+            /* tailles responsives via padding/font-size */
+            padding: 6px 12px;
+            font-size: 10px;
+            margin-right: 8px; /* marge droite pour ne pas coller au bord */
+        }
+        @media (min-width: 400px) { .nav-rdv { padding: 7px 14px; font-size: 10px; margin-right: 10px; } }
+        @media (min-width: 640px) { .nav-rdv { padding: 8px 16px; font-size: 11px; margin-right: 0; } }
+        @media (min-width: 768px) { .nav-rdv { padding: 10px 28px; font-size: 13px; } }
+        .nav-rdv:hover { background: #b8905a; }
     </style>
 </head>
 <body class="antialiased">
 
-<!-- NAV -->
+<!-- ══ NAV ══ -->
 <nav class="fixed w-full z-50 bg-phare-dark/95 backdrop-blur-md shadow-lg">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 flex justify-between items-stretch h-16 sm:h-20 md:h-24 relative">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 flex justify-between items-center h-16 sm:h-20 md:h-24 relative gap-2">
 
-        <a href="#" class="relative flex items-center pr-14 sm:pr-8 md:pr-16 pl-4 sm:pl-6 -ml-2 sm:-ml-6 flex-shrink-0 group">
-            <div class="absolute inset-y-0 right-0 w-[100vw] bg-white z-0" style="clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 100%, 0 100%);"></div>
-            <img src="logo.png" alt="Phare" class="h-14 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[150px] sm:max-w-none object-contain relative z-10 transform scale-110 sm:scale-100 origin-left group-hover:scale-105 transition-transform">
+        <!-- Logo -->
+        <a href="#" class="relative flex items-center flex-shrink-0 group" style="padding-right: clamp(36px, 8vw, 64px);">
+            <div class="absolute inset-y-0 right-0 w-[200%] bg-white z-0" style="clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);"></div>
+            <img src="logo.png" alt="Phare"
+                 class="relative z-10 object-contain origin-left group-hover:scale-105 transition-transform"
+                 style="height: clamp(36px, 5.5vw, 76px); max-width: 140px;">
         </a>
 
+        <!-- Liens desktop -->
+        <div class="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8 text-[10px] xl:text-xs font-bold uppercase tracking-widest text-white relative z-10">
+            <a href="#ventes"    class="nav-link hover:text-phare-gold whitespace-nowrap">Force de vente sup.</a>
+            <a href="#conseil"   class="nav-link hover:text-phare-gold whitespace-nowrap">Conseil</a>
+            <a href="#branche"   class="nav-link hover:text-phare-gold whitespace-nowrap">Création de branche</a>
+            <a href="#coaching"  class="nav-link hover:text-phare-gold whitespace-nowrap">Coaching</a>
+            <a href="#marketing" class="nav-link hover:text-phare-gold whitespace-nowrap">Force marketing sup.</a>
+        </div>
+
+        <!-- Bouton mobile "Nos services" -->
         <div class="flex-1 flex justify-center items-center lg:hidden z-20">
-            <button id="mobile-menu-btn" class="text-white px-1 focus:outline-none hover:text-phare-gold font-bold uppercase tracking-widest text-[9px] sm:text-[10px] flex items-center gap-1 whitespace-nowrap">
+            <button id="mobile-menu-btn" class="text-white focus:outline-none hover:text-phare-gold font-bold uppercase tracking-widest text-[9px] sm:text-[10px] flex items-center gap-1 whitespace-nowrap">
                 Nos services
                 <svg class="w-2.5 h-2.5 transition-transform duration-300 flex-shrink-0" id="menu-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
@@ -122,36 +131,27 @@
             </button>
         </div>
 
-        <div class="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8 px-6 xl:px-12 text-[10px] xl:text-xs font-bold uppercase tracking-widest text-white relative z-10">
-            <a href="#ventes" class="nav-link hover:text-phare-gold whitespace-nowrap">Force de vente sup.</a>
-            <a href="#conseil" class="nav-link hover:text-phare-gold whitespace-nowrap">Conseil</a>
-            <a href="#branche" class="nav-link hover:text-phare-gold whitespace-nowrap">Création de branche</a>
-            <a href="#coaching" class="nav-link hover:text-phare-gold whitespace-nowrap">Coaching</a>
-            <a href="#marketing" class="nav-link hover:text-phare-gold whitespace-nowrap">Force marketing sup.</a>
-        </div>
-
-        <div class="flex items-center relative z-10 pl-1 flex-shrink-0">
-            <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="cta-button bg-phare-gold text-phare-dark px-3 py-1.5 sm:px-4 sm:py-2 md:px-8 md:py-3 rounded-full font-semibold text-[10px] sm:text-xs md:text-sm hover:bg-yellow-600 shadow-lg whitespace-nowrap flex items-center justify-center text-center">
-                Prendre RDV
-            </a>
-        </div>
+        <!-- CTA Prendre RDV — toujours visible, ne déborde plus -->
+        <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" class="nav-rdv cta-button">
+            Prendre RDV
+        </a>
     </div>
 
-    <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-phare-dark border-t border-white/10 shadow-2xl">
+    <!-- Mobile menu dropdown -->
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-phare-dark border-t border-white/10 shadow-2xl z-50">
         <div class="flex flex-col px-6 py-4 space-y-5 text-xs font-bold uppercase tracking-widest text-white">
-            <a href="#ventes" class="mobile-link hover:text-phare-gold">Force de vente sup.</a>
-            <a href="#conseil" class="mobile-link hover:text-phare-gold">Conseil</a>
-            <a href="#branche" class="mobile-link hover:text-phare-gold">Création de branche</a>
-            <a href="#coaching" class="mobile-link hover:text-phare-gold">Coaching</a>
+            <a href="#ventes"    class="mobile-link hover:text-phare-gold">Force de vente sup.</a>
+            <a href="#conseil"   class="mobile-link hover:text-phare-gold">Conseil</a>
+            <a href="#branche"   class="mobile-link hover:text-phare-gold">Création de branche</a>
+            <a href="#coaching"  class="mobile-link hover:text-phare-gold">Coaching</a>
             <a href="#marketing" class="mobile-link hover:text-phare-gold">Force marketing sup.</a>
         </div>
     </div>
 </nav>
 
-<!-- HERO -->
+<!-- ══ HERO ══ -->
 <section class="hero-section bg-white flex items-center">
     <div class="max-w-7xl mx-auto px-6 w-full flex flex-col gap-6 md:gap-8 items-center justify-center text-center">
-
         <div class="space-y-5 md:space-y-7 w-full max-w-4xl">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-phare-dark leading-tight tracking-tight reveal">
                 Ne naviguez plus à vue.<br>
@@ -166,11 +166,10 @@
                 </a>
             </div>
         </div>
-
     </div>
 </section>
 
-<!-- MISSION -->
+<!-- ══ MISSION ══ -->
 <section class="section-spacing bg-phare-dark relative overflow-hidden">
     <div class="max-w-4xl mx-auto px-6 text-center reveal">
         <h2 class="text-phare-gold text-sm md:text-lg font-medium tracking-[0.3em] uppercase mb-8">Notre Mission</h2>
@@ -178,7 +177,6 @@
         <p class="text-slate-300 text-lg md:text-xl font-light leading-relaxed mb-12">
             Le marché est en perpétuel mouvement. Dans cette complexité, vous avez besoin d'une vision claire. Nous avons choisi le nom <strong class="text-white">Phare</strong> car nous sommes votre guide : nous apportons un cap et une arrivée à bon port.
         </p>
-        <!-- Chiffre discret -->
         <div class="inline-flex flex-wrap items-center justify-center gap-3 border border-phare-gold/20 rounded-full px-7 py-3">
             <span class="text-phare-gold font-bold text-sm tracking-wide">
                 + <span id="counter" data-target="3000000">0</span> €
@@ -189,7 +187,7 @@
     </div>
 </section>
 
-<!-- PROCESSUS -->
+<!-- ══ PROCESSUS ══ -->
 <section class="section-spacing bg-white">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-20 reveal">
@@ -259,7 +257,7 @@
     </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ══ SERVICES ══ -->
 <section class="section-spacing bg-slate-50">
     <div class="max-w-7xl mx-auto px-6">
         <h2 class="text-3xl md:text-5xl font-bold text-center mb-24 reveal text-phare-dark">Des solutions pour chaque étape.</h2>
@@ -307,7 +305,7 @@
     </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══ FOOTER ══ -->
 <footer class="py-16 bg-white border-t border-slate-100">
     <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
         <div class="space-y-4">
@@ -321,13 +319,12 @@
     </div>
 </footer>
 
-<!-- FLOATING CTA -->
+<!-- ══ FLOATING CTA ══ -->
 <a href="https://calendar.app.google/roD6kYGyva7NMoL58" target="_blank" id="floating-cta" class="cta-button fixed bottom-8 left-1/2 -translate-x-1/2 md:bottom-10 md:left-auto md:right-10 md:translate-x-0 z-50 w-[90%] max-w-[350px] md:w-auto bg-phare-gold hover:bg-yellow-600 text-phare-dark px-6 py-4 rounded-full font-bold text-sm md:text-base text-center shadow-2xl opacity-0 translate-y-10 pointer-events-none transition-all duration-500 flex items-center justify-center">
     Planifier un appel expert
 </a>
 
 <script>
-    /* Mobile menu */
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
     const chevron = document.getElementById('menu-chevron');
@@ -342,7 +339,6 @@
         });
     });
 
-    /* Compteur — se déclenche quand visible */
     function animateCounter() {
         const el = document.getElementById('counter');
         const target = +el.getAttribute('data-target');
@@ -352,31 +348,22 @@
             if (!startTime) startTime = now;
             const p = Math.min((now - startTime) / duration, 1);
             const ease = 1 - Math.pow(1 - p, 3);
-            const val = Math.floor(target * ease);
-            el.textContent = val.toLocaleString('fr-FR');
+            el.textContent = Math.floor(target * ease).toLocaleString('fr-FR');
             if (p < 1) requestAnimationFrame(update);
         };
         const obs = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                requestAnimationFrame(update);
-                obs.disconnect();
-            }
+            if (entries[0].isIntersecting) { requestAnimationFrame(update); obs.disconnect(); }
         }, { threshold: 0.5 });
         obs.observe(el);
     }
 
-    /* Reveal */
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                revealObserver.unobserve(entry.target);
-            }
+            if (entry.isIntersecting) { entry.target.classList.add('active'); revealObserver.unobserve(entry.target); }
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
 
-    /* Floating CTA */
     const floatingCta = document.getElementById('floating-cta');
     const heroCta = document.getElementById('hero-cta');
     window.addEventListener('scroll', () => {
